@@ -1,0 +1,252 @@
+
+
+
+
+{% extends "main/base2.html" %}
+{% load static %}
+
+
+{% block title %}{% endblock  %}
+{% block description  %}{% endblock  %}
+{% block keywords  %}{% endblock  %}
+
+
+{% block extend_header %}
+<style>
+    .prev:hover, .next:hover {
+        background-color: #f10502;
+      }
+      .active, .dot:hover {
+        background-color: #f10502;
+      }
+      
+      /* Fading animation */
+      .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+      
+      @keyframes fade {
+        from {opacity: .4}
+        to {opacity: 1}
+      }
+        
+    .but:hover {
+        animation-name: bounce;
+        animation-duration: 0.8s;
+        animation-timing-function: ease-in-out;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-play-state: running;
+    }
+    
+    
+    @keyframes bounce {
+
+        70% {
+            transform: translateY(0%);
+            padding-bottom: 7px;
+        }
+    
+        80% {
+            transform: translateY(-15%);
+        }
+    
+        90% {
+            transform: translateY(0%);
+            padding-bottom: 8px;
+        }
+    
+        95% {
+            transform: translateY(-7%);
+        }
+    
+        97% {
+            transform: translateY(0%);
+            padding-bottom: 9px;
+        }
+    
+        99% {
+            transform: translateY(-3%);
+        }
+    
+        100% {
+            transform: translateY(0);
+            padding-bottom: 9px;
+            opacity: 1;
+        }
+    }
+
+    .sar{
+        filter: blur(2px);
+        transition: 0.2s;
+    }
+      
+    
+      .container:hover .image {
+        opacity: 0.3;
+      }
+      
+      .container:hover .middle {
+        opacity: 1;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      
+    .slide-in {
+        animation: slideIn 0.5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .blogbg{
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url({% static 'images/hero-bg.jpg'%});
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .blog{
+        -webkit-text-stroke-width: 3px;
+        -webkit-text-stroke-color: #f10502;
+
+      }
+      
+
+
+</style>
+{% endblock  %}
+
+
+
+{% block extend_footer %}{% endblock  %}
+
+{% block content %}
+
+<section class="max-w-[1450px] mt-[20px] border border-[#f10502] mx-auto flex md:flex-row flex-col justify-between gap-2">
+
+    <main class="max-w-[1200px]  relative">
+
+      <div class=" relative flex flex-col md:flex-wrap md:flex-row md:max-w-[1300px] lg:max-w-[1200px]  ">
+
+          <div class="max-w-[80%] mt-7">
+              <h1 class="text-[20px] md:text-[30px] text-justify text-bold mx-2 md:mx-5">{{object.name|title}}</h1>
+
+              <h2 class="text-[15px] my-2 mx-2 md:mx-5"> Date: <span class="text-[#f10502]">{{object.timestamp.date}} </span> || Time: <span class="text-[#f10502]">{{object.timestamp.time}}</span></h2>
+          </div>
+          <div class="max-w-[95%] text-justify mx-2 md:mx-5">
+            {{object.body|safe}}
+          </div>
+
+          <div class="flex gap-5 my-4 mx-2 md:mx-5">
+              <img src="{{object.author_image.url}}" class=" border rounded-xl h-auto" width="150px" alt="">
+              <div class="flex flex-col justify-center">
+                  <h2 class="md:text-[20px] text-justify font-bold">{{object.author_name}}</h2>
+                  <h2 class="md:text-[20px] text-justify font-bold text-[#f10502]">{{object.author_profession}}</h2>
+              </div>
+          </div>
+          
+
+      </div>
+
+    </main>
+
+
+    <aside class="md:border-l border-[#f10502] lg:max-w-[300px] md:max-w-[200px] ">
+
+      <div class="mt-3">
+
+        {% if blogs %}
+
+        <h2 class="text-[18px] mx-2 mt-5 text-black">Recent Posts</h2>
+        <hr class="w-[60px] mx-2 h-[2px] bg-[#f10502]">
+        {% else  %}
+        <h2 class="text-[18px] mx-2 mt-5 text-black">No Recent Posts</h2>
+        <hr class="w-[60px] mx-2 h-[2px] bg-[#f10502]">
+        {% endif %}
+
+
+        {% for post in blogs %}
+        {% if post.is_recent %}
+
+        <div class="relative">
+    
+          <div  class="  flex flex-col mx-3 border-2 bg-transparent rounded-xl border-[#f10502] mt-[20px] md:mt-[30px] justify-center">
+                <div class="flex flex-col mt-2 mx-2">
+                    <a href="{% url 'main:blog' slug=post.slug %}">
+                      <i><h2 class="text-[15px] text-justify text-[#f10502] font-semibold my-1">{{post.name}}</h2></i>
+                    </a>
+                    <p class=" text-[12px] my-1 text-justify  ">{{post.description}} <a href="{% url 'main:blog' slug=post.slug %}"  class=" text-[15px] text-[#f10502]">Read on >>>></a> </p>
+                </div>
+          </div>
+    
+            
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <div class="h-[95%] my-9 relative ">
+  
+          <div class="px-2 my-5 mx-3 border border-black rounded-lg ">
+          
+              <h2 class="text-[18px] mx-2 my-2 text-black">Join Us</h2>
+              <hr class="w-[80px] mx-2 mb-7 h-[2px] bg-[#f10502]">
+
+              <form   action="https://formsubmit.io/send/ae4e24e9-a550-430b-aa7c-5c121bf34fc5" method="post" enctype="multipart/form-data">
+
+                 <div class="flex flex-col gap-4 ">   
+                  <input type="text" class="border placeholder:p-3 focus:outline-[#f10502] outline-none placeholder:text-black focus:p-1 " placeholder="Name"  name="name" >
+
+                  <input type="email" class="border placeholder:p-3 focus:outline-[#f10502] focus:rounded-lg outline-none placeholder:text-black focus:p-1 " placeholder="Email" name="email" >
+
+                  <textarea  id="" cols="10" class="border focus:rounded-lg w-full placeholder:p-2 focus:p-1 placeholder:text-black focus:outline-[#f10502] outline-none" rows="5" placeholder='Message' name="message" ></textarea>
+
+                  <input type="hidden" name="_cc" value="shadowtechhub@gmail.com">
+
+                  <input type="hidden" name="_next" value="blog.html">
+
+                  <input type="hidden" class="border p-1 w-full  focus:rounded-lg placeholder:p-3 focus:outline-[#f10502] outline-none focus:p-1 placeholder:text-black" name="_subject" value="I want to join your team" placeholder="Subject" >
+                  </div> 
+                  <br>
+                  <input type="submit" style="border-top-right-radius: 20px;border-bottom-left-radius: 20px;" class="but my-2 hover:bg-black hover:text-white mr-5 but py-2 px-5 bg-[#f10502] text-black " value="Send message">
+                  
+              </form>
+          </div>
+        </div>
+
+
+        <div class="h-[95%] my-9 relative ">
+  
+          <div class="px-2 my-5 mx-3 border border-black rounded-lg ">
+          
+
+              <h2 class="lg:text-[20px] text-[12px] my-3 font-semibold   text-center" >Subscribe to our Newsletter</h2>
+
+              <form  action="" method="post" enctype="">
+
+                 <div class="flex flex-col gap-2 mt-5 ">   
+
+                  <input type="email" class="border placeholder:p-3 focus:outline-[#f10502] focus:rounded-lg outline-none placeholder:text-black focus:p-1 " placeholder="Email" name="email" >
+                  </div> 
+                  <br>
+
+                  <input type="submit" style="border-top-right-radius: 20px;border-bottom-left-radius: 20px;" class="but my-1 hover:bg-black hover:text-white but mx-auto flex justify-center py-1 px-3 bg-[#f10502] text-black" value="Subscribe">
+                  
+              </form>
+          </div>
+        </div>
+
+      </div>
+
+    </aside>
+
+  </section>
+
+
+{% endblock  %}

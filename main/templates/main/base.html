@@ -1,0 +1,46 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" >
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name='description' content= '{% block description %}{% endblock %}' />
+    <meta name='keywords' content= 'Fajumo olatunde sunkanmi, fullstack dev, Django Dev, Shadow Dev, Blog,Travel,Sport,Science' />
+    <link href=" {% static 'font-awesome-4.7.0/" rel="stylesheet' %}" />
+    <link rel="icon" sizes="180x180" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href=" {% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}" />
+    <link rel="preconnect" href=" https://fonts.googleapis.com " />
+    <link rel="preconnect" href=" https://fonts.gstatic.com " crossorigin />
+    <link href="https://cdn.tailwindcss.com/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;700&display=swap"
+      rel="stylesheet"/>
+    <link rel="canonical" href="{{request.path}}">
+    <link rel="home" href="{% url 'main:home' %}">
+    <script src=" https://cdn.tailwindcss.com "></script>
+
+    <title>{% block title %}{% endblock  %}</title>
+    {% block extend_header %}{% endblock %}
+
+  </head>
+
+  <body class= "dark bg-black text-white dig md:max-w-[1400px] mx-auto relative z-2 overflow-y-auto  " id="class" >
+
+    <main id="body" class="overflow-x-hidden dark" >
+
+        {% comment %} <button onclick="toggleDarkMode()">Toggle Dark Mode</button> {% endcomment %}
+
+        {% include "main/partials/header.html" %}
+        {% block content %} {% endblock %}
+      
+    </main>
+    <br><br><br><br><br>
+
+    {% include "main/partials/footer.html" %}
+
+  </body>
+
+</html>

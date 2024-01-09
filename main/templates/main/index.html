@@ -1,0 +1,335 @@
+
+{% extends "main/base.html" %}
+{% load static %}
+
+
+{% block title %}Shadow-dev{% endblock  %}
+{% comment %} {% block description  %}{% endblock  %}
+{% block keywords  %} {% endblock  %} {% endcomment %}
+
+
+{% block extend_header %}
+<style>
+    .prev:hover, .next:hover {
+        background-color: #f10502;
+      }
+      .active, .dot:hover {
+        background-color: #f10502;
+      }
+      
+      /* Fading animation */
+      .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+      
+      @keyframes fade {
+        from {opacity: .4}
+        to {opacity: 1}
+      }
+        
+    .but:hover {
+        animation-name: bounce;
+        animation-duration: 0.8s;
+        animation-timing-function: ease-in-out;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-play-state: running;
+    }
+    
+    
+    @keyframes bounce {
+
+        70% {
+            transform: translateY(0%);
+            padding-bottom: 7px;
+        }
+    
+        80% {
+            transform: translateY(-15%);
+        }
+    
+        90% {
+            transform: translateY(0%);
+            padding-bottom: 8px;
+        }
+    
+        95% {
+            transform: translateY(-7%);
+        }
+    
+        97% {
+            transform: translateY(0%);
+            padding-bottom: 9px;
+        }
+    
+        99% {
+            transform: translateY(-3%);
+        }
+    
+        100% {
+            transform: translateY(0);
+            padding-bottom: 9px;
+            opacity: 1;
+        }
+    }
+
+    .sar{
+        filter: blur(2px);
+        transition: 0.2s;
+    }
+      
+    
+      .container:hover .image {
+        opacity: 0.3;
+      }
+      
+      .container:hover .middle {
+        opacity: 1;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      
+    .slide-in {
+        animation: slideIn 0.5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
+      }
+      
+
+
+</style>
+{% endblock  %}
+
+
+
+{% block extend_footer %}
+
+{% endblock  %}
+
+{% block content %}
+
+<main class="md:mt-[10px] my-[20px] p-3 md:p-4 flex  md:flex-row flex-col justify-around " >
+
+    <div class="max-w-[500px] px-2 md:p-3 my-auto md:ml-9 ">
+
+        <h2 class="md:text-[70px] text-[30px] text-[#f10502]  ">About me</h2>
+
+        <h1 class="py-2 leading-8">I'm <span class="text-[#f10502]">{{me.first_name|title}} {{me.last_name|title}}</span>,<span class= " block text-slate-400 px-1">{{me.userprofile.title}}</span> </h1>
+        <p class="py-2 px-1 leading-8">{{me.userprofile.bio}}
+        </p>
+        <div class="max-w-full md:max-w-[80%] flex gap-3 flex-row  my-6" >
+            <a href="{% url 'main:contact' %}" target='_blank' class="  but py-1 text-center px-3 bg-[#f10502]  rounded-xl ">Contact</p> 
+
+            <a href= "{{me.userprofile.cv.url}}" target="_blank"  class=" mr-2 but py-1  text-center px-2 bg-[#f10502]  rounded-xl "> Download CV</a> 
+        </div>
+    
+    </div>
+
+    <div style="border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px; border-top-left-radius: 10px; border-bottom-right-radius: 10px;"  class=" p-3 md:p-2 align-center border border-[#f10502] item-center md:w-[35%] h-[35%] md:h-[25%] rounded-lg flex justify-center relative ">
+        <img  src="{{me.userprofile.avatar.url}}" class="  align-center item-center flex justify-center " style="border-top-right-radius: 30px;
+        border-bottom-left-radius: 30px; border-top-left-radius: 10px; border-bottom-right-radius: 10px;"  alt="">
+    </div>
+
+</main>
+
+<span class="mt-[15px]" id="skillz"></span>
+
+<section class="mx-auto md:ml-4rem " >
+    <h2 class="md:max-w-[700px] max-w-[300px] text-[#f10502] mb-[30px] md:mt-0 mx-auto py-[30px] md:py-[10px] text-center text-[30px] md:text-[48px] px-[30px] md:px-[60px] font-bold">My Skill Sets</h2>
+    
+    <div class=" flex flex-1 flex-col md:flex-row md:flex-wrap gap-3 mx-4 w-full">
+        
+        {% for s in skills %}
+        {% if s.is_active %}
+        <div class=" relative flex flex-col before:absolute before:top-0 before:content-[''] md:before:w-[83%]  before:w-[83.33%] before:h-[1px] before:bg-[#f10502] md:after:content-[''] after:h-[83.33%] after:w-[1px] md:after:bg-[#f10502] after:absolute after:right-[-22px] justify-center items-center max-w-[400px]  p-4  md:mx-5">
+            <img src="{{s.image.url}}" alt="" style="border-top-right-radius: 30px;
+            border-bottom-left-radius: 30px; border-top-left-radius: 10px; border-bottom-right-radius: 10px;" class="w-[30%] mt-3 border border-[#f10502]">
+
+            <h2 class="text-[25px] md:text-[35px] text-center px-2 md:px-5 mt-3 leading-0">{{s.name}} </h2>
+
+            <p class="text-center text-[18px] text-gray-500 py-2 md:py-7 px-3 md:px-3">{{s.title}}
+            </p>
+
+            <a href="{{s.url}}" target="_blank" class="but px-6 py-2 border my-6 border-[#f10502] hover:bg-[#f10502] hover:border-white hover:text-white hover:rounded-lg text-500">Learn more</a>
+        </div>
+        
+        {% endif %}
+        
+        {% endfor %}
+
+    </div>
+</section>
+
+<span class="mt-[10px]" id="prt"></span>
+
+<section class="mt-[30px] md:mt-[70px] md:max-w-[1200px]  mx-auto ">
+
+        <div class="max-w-[500] mx-auto border-white mb-7">
+            <h2 class="text-center md:text-[48px] text-[30px] text-[#f10502]">My Recent Works</h2>
+        </div>
+
+    <div class="flex md:flex-row md:flex-wrap flex-col justify-between my-[30px] w-full ">
+
+        {% for port in portfolio  %}
+        {% if port.is_active %}
+
+        <div class="relative md:w-[33%] md:mb-4 " >
+
+            <div class="container opacity-1 block p-3  h-auto transition-all "
+            style="backface-visibility: hidden;">
+
+                <img src="{{port.image.url}}" width="50%" alt="Avatar" class="image" style="width:100%">
+
+                <div class="middle absolute left-[50%] top-[50%] md:left-[50%] w-full  text-center opacity-0 transition-all " style="transform: translate(-50%, -50%);">
+
+                    <div class="flex justify-center flex-col md:mt-3 w-full  rounded-lg text-white md:py-[2px] md:px-[4px]">
+                        <h2 class="text-[28px]">{{port.name}}</h2>
+                        <p class="text-[15px]"><span class="p-1 text-[16px]">Role :</span>{{port.role}}</p>
+                        <p class="text-[15px]" ><span class=" text-[16px]">Skillz :</span> {{port.skill}}</p>
+                        <div class="w-[30%] but mx-auto flex text-center justify-center mt-4 rounded-lg border md:p-2  p-1  bg-transparent hover:bg-[#f10502]">
+
+                             <a href="{{port.url}}" target="_blank">View</a>
+
+                        </div>
+
+                    </div>
+              </div>
+
+            </div>
+            
+        </div>
+        {% endif %}
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<section class="mt-[30px] md:mt-[40px] md:max-w-[1200px]  mx-auto">
+
+    <h2 class="text-center md:text-[48px] text-[30px] text-[#f10502]">My Reviews</h2>
+
+    <div class="slideshow-container  relative flex mt-[20px] md:mt-[50px] flex-col max-w-[900px] md:flex-row md:p-9 p-4  gap-5 justify-center mx-auto">
+
+        <!-- Full-width images with number and caption text -->
+
+    {% if testimonials %}
+    <h2 class="text-center md:text-[48px] text-[30px] text-[#f10502]"></h2>
+    {% else %}
+    <h2 class="text-center md:text-[28px] text-[18px] text-[#f10502]">No Reviews 😒</h2>
+    {% endif %}
+
+        
+        {% for test in testimonials %}
+        {% if test.is_active %}
+
+        <div style="display: none;" class="mySlides fade md:max-w-[60%]  mx-auto">
+        
+            <div  class=" flex-col flex md:flex-row mx-3 border-2 bg-transparent rounded-xl border-[#f10502] mt-[20px] md:mt-[10px] md:p-4 p-4 justify-center">
+    
+                <div class=" align-center  items-center mx-3 mt-3 justify-center align-center flex flex-col gap-3 md:gap-3" >
+                    <div class=" items-center  md:p-3 border-[#f10502] border-1  md:justify-center md:align-cente rounded  md:flex" >
+                        <img src="{{test.thumbnail.url}}" width="300px" class="border-[#f10502] h-auto items-center rounded-[16px]" alt="" >
+                    </div>
+                    <div class="flex flex-col w-[150px] h-auto justify-center align-center ">
+                        <h2 class="text-[17px] text-center"> {{test.name}} </h2>
+                        <h3 class="text-[16px] text-center text-[#f10502]"> {{test.role}}</h3>
+                    </div>
+                </div>
+    
+                <div class="flex flex-col md:mt-8 mt-2 ">
+                    <i class=" fa fa-quote-left text-[30px] ml-5 text-gray-600" aria-hidden="true"></i>
+                    <p class=" mx-2 mt-[-25px] text-[18px] p-1 ">{{test.title}}</p>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+     
+      
+        <!-- Next and previous buttons -->
+        <a class="prev cursor-pointer left-0 absolute top-[50%]  w-auto p-[16px] text-white font-bold text-[18px] transition-all rounded-[0px 3px] " onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next right-0 cursor-pointer absolute top-[50%] w-auto p-[16px] text-white font-bold text-[18px] transition-all rounded-[0px 3px] " onclick="plusSlides(1)">&#10095;</a>
+    
+    </div>
+    
+    <br>
+      
+    <!-- The dots/circles -->
+    <div style="text-align:center">
+        <span class="dot cursor-pointer h-[15px] w-[15px] m-[0 2px] bg-[#bbb] rounded-[50%]" style="display: inline-block; transition: background-color 0.6s ease;" onclick="currentSlide(1)"></span>
+        <span class="dot cursor-pointer h-[15px] w-[15px] m-[0 2px] bg-[#bbb] rounded-[50%]" style="display: inline-block; transition: background-color 0.6s ease;" onclick="currentSlide(2)"></span>
+        <span class="dot cursor-pointer h-[15px] w-[15px] m-[0 2px] bg-[#bbb] rounded-[50%]" style="display: inline-block; transition: background-color 0.6s ease;" onclick="currentSlide(3)"></span>
+    </div>
+
+</section>
+
+<section class="w-[1200px]  mx-auto mt-9 relative">
+
+    <h2 class="text-center md:text-[48px] text-[30px] text-[#f10502]">Our Posts</h2>
+
+    {% if blog %}
+
+    <h2 class="text-center md:text-[48px] text-[30px] text-[#f10502]"> </h2>
+    {% else  %}
+    <div class=" my-7 w-[400px] mx-auto flex justify-center items-center">
+        <h2 class="text-center md:text-[28px] text-[18px] text-[#f10502]">No Featured Posts 🤨</h2>
+    </div>
+    
+    {% endif %}
+
+    
+
+    <div class=" relative w-full  flex flex-col md:flex-wrap  md:flex-row gap-2 ">
+
+            <!-- Full-width images with number and caption text -->
+      
+            {% for post in blog %}
+            {% if post.is_feature %}
+            
+            <div class=" md:w-[32%] relative">
+        
+              <div  class="  flex flex-col mx-3  border-2 bg-transparent rounded-xl border-[#f10502] mt-[20px] md:mt-[30px] justify-center">
+      
+                <div class=" w-full  mt-3" >
+                    <div class="  rounded flex  justify-center  " >
+                      <a href="{% url 'main:blog' slug=post.slug %}" target="_blank">
+                        <img src="{{post.feature_image.url}}" width="250px" class=" rounded-lg" alt="">
+                      </a>
+                    </div>
+                  </div>
+      
+                <div class="flex flex-col mt-3 mx-2">
+                    <h2 class="text-[15px] my-2"> Date: <span class="text-[#f10502]">{{post.timestamp.date}}</span> || Time: <span class="text-[#f10502]">{{post.timestamp.time}}</span></h2>
+                    <i><h2 class="text-[15px] text-[#f10502] font-semibold my-1"> {{post.name}} </h2></i>
+                    <p class=" text-[15px] my-2 md:mb-9  "> {{post.description}} </p>
+      
+                    <a href="{% url 'main:blog' slug=post.slug %}" target="_blank" style="border-top-right-radius: 20px;border-bottom-left-radius: 20px;" class=" but absolute right-0 bottom-1 my-1 bg-[#f10502] text-white px-4 py-1">Read on</a>
+                   
+                </div>
+              </div>
+        
+            </div>
+      
+            {% endif %}
+            {% endfor %}
+      
+    </div>
+      
+    <div class="flex md:block justify-center mt-3 md:mt-0">
+              <a href="{% url 'main:blogs' %}" target="_blank"  class=" but rounded md:absolute right-[-80px] top-[50%] my-1 bg-[#f10502] text-white px-4 py-1">view all >></a>
+    </div>
+
+</section>
+
+{% endblock  %}

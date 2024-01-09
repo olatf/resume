@@ -1,0 +1,39 @@
+
+
+{% load static %} 
+
+<section class="" >
+
+    <header class="bg-[#f10502] w-full md:max-w-[1200px] md:mx-auto h-[50px] rounded-lg my-4 sticky flex justify-between items-center ">
+
+        <!-- <h3 class="text-[25px] mx-7" >Shadow-dev</h3> -->
+        <a href="{% url 'main:home' %}" >
+            <marquee style= " behavior:alternate; direction: up;" class="md:max-w-[100px] hidden md:block "><i class="">Shadow-dev</marquee>
+        </a>
+        
+
+        <ul class="flex md:gap-7 gap-2 ml-3 md:ml-0">
+            <li><a href="{% url 'main:home' %}" class=" scroll-smooth md:p-2">Home</a></li>
+            <li><a href="#skillz" class=" scroll-smooth md:p-2" >Skillz</a></li>
+            <li><a href="#prt" class=" scroll-smooth md:p-2">Portfolio</a></li>
+            <li><a href="{% url 'main:blogs' %}" target='_blank' class=" scroll-smooth md:p-2">Blog</a></li>
+        </ul>
+        <a href="{% url 'main:contact' %}" target='_blank'  class="md:mr-5 mr-4 md:block but py-1 px-3 md:px-5 bg-black  rounded-xl "  >Hire Me</a>
+        {% comment %} <p href="" class="md:mr-5 mr-4 but py-1 block md:hidden  px-3 md:px-5 bg-black  rounded-xl " onclick='myFunction2() ' >Hire Me</p> {% endcomment %}
+
+    </header>
+
+    <div class="md:max-w-[50%] border  md:hidden ">
+        <marquee style= " behavior:alternate; direction: up;" ><i class="">Shadow-dev</marquee>
+    </div>
+
+    <div class="md:max-w-[500px] mt-4 md:mt-0 md:px-[55px]">
+        <div class="flex flex-row mb-[20px]">
+            <div id="clock" class="md:text-[39px]  text-[20px] slide-in border rounded-lg shadow-lg border-slate-500 px-3 py-2 mx-2 text-center font-bold"></div>
+            <div id="clocks" class="md:text-[39px]  text-[20px] slide-in border rounded-lg shadow-lg border-slate-500 px-3 py-2 mx-2 text-center font-bold"></div>
+            <div id="clocked" class="md:text-[39px]  text-[20px]  slide-in border rounded-lg shadow-lg border-slate-500 px-3 py-2 mx-2 text-center font-bold"></div>
+        </div>
+        <div id="date" class=" md:mx-1 mx-5 mt-[-12px] md:text-[25px] text-[18px] "></div>
+    </div>
+
+</section>

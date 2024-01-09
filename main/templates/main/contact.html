@@ -1,0 +1,192 @@
+
+
+{% extends "main/base.html" %}
+{% load static %}
+
+
+{% block title %}Shadow-dev{% endblock  %}
+{% block description  %}{% endblock  %}
+{% block keywords  %}{% endblock  %}
+
+
+{% block extend_header %}
+<style>
+    .prev:hover, .next:hover {
+        background-color: #f10502;
+      }
+      .active, .dot:hover {
+        background-color: #f10502;
+      }
+      
+      /* Fading animation */
+      .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+      
+      @keyframes fade {
+        from {opacity: .4}
+        to {opacity: 1}
+      }
+        
+    .but:hover {
+        animation-name: bounce;
+        animation-duration: 0.8s;
+        animation-timing-function: ease-in-out;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-play-state: running;
+    }
+    
+    
+    @keyframes bounce {
+
+        70% {
+            transform: translateY(0%);
+            padding-bottom: 7px;
+        }
+    
+        80% {
+            transform: translateY(-15%);
+        }
+    
+        90% {
+            transform: translateY(0%);
+            padding-bottom: 8px;
+        }
+    
+        95% {
+            transform: translateY(-7%);
+        }
+    
+        97% {
+            transform: translateY(0%);
+            padding-bottom: 9px;
+        }
+    
+        99% {
+            transform: translateY(-3%);
+        }
+    
+        100% {
+            transform: translateY(0);
+            padding-bottom: 9px;
+            opacity: 1;
+        }
+    }
+
+    .sar{
+        filter: blur(2px);
+        transition: 0.2s;
+    }
+      
+    
+      .container:hover .image {
+        opacity: 0.3;
+      }
+      
+      .container:hover .middle {
+        opacity: 1;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      
+    .slide-in {
+        animation: slideIn 0.5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
+      }
+      
+
+
+</style>
+{% endblock  %}
+
+
+
+{% block extend_footer %}{% endblock  %}
+
+{% block content %}
+
+<section class="mt-[100px]"  >
+
+
+
+    <div  class="md:w-[700px] w-[300px] h-auto  rounded-lg bg-white mx-auto z-88  transition-all relative ">
+
+        <div class=" flex flex-col md:flex-row bg-white md:h-[514px] z-5 mx-auto text-black border  relative  rounded-lg">
+
+            <div class="h-[95%] my-auto ">
+
+                <div class="px-2 py-5 mx-3">
+                
+
+                    <h2 class="text-[30px] my-3 font-semibold" >Get in touch</h2>
+    
+                    <form action="https://formsubmit.io/send/ae4e24e9-a550-430b-aa7c-5c121bf34fc5" method="post" enctype="multipart/form-data">
+                        
+                       <div class="flex md:flex-row flex-col gap-5 md:gap-3 my-4">   
+                        <input type="text" class=" rounded-lg border placeholder:p-3 focus:outline-[#f10502] outline-none placeholder:text-black focus:p-1 " placeholder="Name "  name="name" >
+                        <input type="email" class=" rounded-lg border placeholder:p-3 focus:outline-[#f10502] focus:rounded-lg outline-none placeholder:text-black focus:p-1 " placeholder="Email" name="email" >
+                       </div>
+                        <input type="text" class="border my-3 p-1 w-full  focus:rounded-lg placeholder:p-3 focus:outline-[#f10502] outline-none focus:p-1 placeholder:text-black rounded-lg  text-black    " name="_subject" placeholder="Subject" >
+                        <br>
+                        <input type="hidden" name="_cc" value="shadowtechhub@gmail.com">
+                        <input type="hidden" name="_next" value="index.html">
+
+                        <textarea  id="" cols="10" class="border focus:rounded-lg  my-3 p-1 w-full placeholder:p-2 focus:p-1 placeholder:text-black focus:outline-[#f10502] outline-none" rows="5" placeholder='Message' name="message" ></textarea>
+                        <br>    
+    
+                        <input type="submit" class="but my-3 hover:bg-black hover:text-white mr-5 but py-2 px-5 bg-[#f10502] text-black rounded-xl " value="Send message">
+                        
+                    </form>
+                </div>
+            </div>
+
+            <div class="md:w-[40%] bg-[#f10502] md:h-[530px] md:absolute top-[-3.5%] left-[60.2%] rounded-lg">
+
+                <i class="fa fa-user  float-right text-[25px] p-2 border mx-2 rounded-lg mt-3"onclick="myFunction() " ></i>
+
+                <div class="my-[5px]  p-3">
+                    <h2 class="text-[20px] text-white my-4" >Contact Me</h2>
+
+                    <div class="flex gap-4 justify-between items-center w-full  p-3">
+                        <i  class="fa fa-map text-[25px] text-white p-3 border rounded-xl"></i>
+                        <p class="text-[16px] text-white" >Address: <br>  Surulere, Camp Funaab Alabata, Ogun State.</p>
+                    </div>
+
+                    <div class="flex gap-4 my-3 justify-between items-center w-full  p-3">
+                        <i  class="fa fa-phone text-[25px] text-white p-3 border rounded-xl"></i>
+                        <p class="text-[16px] text-white" >Phone: <br> (+234) 9093957534 (+234) 9163400793  </p>
+                    </div>
+
+                    <div class="flex gap-4 my-3 justify-between items-center w-full  p-3">
+                        <i  class="fa fa-send text-[20px] text-white p-3 border rounded-xl"></i>
+                        <p class="text-[15px] text-white" >Email: <br> shadowtechhub@gmail.com </p>
+                    </div>
+
+                    <div class=" flex gap-3 mt-[60px] mx-5">
+                        <a href=""><i class="fa fa-facebook but text-[20px] text-white py-2 px-3 border rounded-xl"></i></a>
+                        <a href=""> <i class="fa fa-twitter but text-[20px] text-white p-2 border rounded-xl"></i></a>
+                        <a href="https://wa.me/+2349093957534" target="_blank"><i class="fa fa-whatsapp but text-[20px] text-white p-2 border rounded-xl"></i></a>
+                        <a href=""> <i class="fa fa-linkedin but text-[20px] text-white p-2 border rounded-xl"></i></a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock  %}
